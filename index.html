@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A small profile page for Biki, focused on autonomous coding and practical building.">
+  <title>Biki | Build, Automate, Ship</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #11110f;
+      --surface: #1a1a17;
+      --ink: #f5f1e8;
+      --muted: #aaa79f;
+      --line: #34332e;
+      --accent: #d7ff64;
+      --accent-ink: #171a0d;
+      --max: 1080px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px),
+        var(--bg);
+      background-size: 40px 40px;
+      color: var(--ink);
+      font-family: "Trebuchet MS", "Avenir Next", Avenir, sans-serif;
+    }
+
+    a { color: inherit; }
+
+    .shell {
+      width: min(calc(100% - 40px), var(--max));
+      margin: 0 auto;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 88px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .mark {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      font-weight: 800;
+      letter-spacing: .02em;
+    }
+
+    .mark::before {
+      content: "B";
+      display: grid;
+      place-items: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: var(--accent-ink);
+      font-size: 15px;
+    }
+
+    .status {
+      color: var(--muted);
+      font: 600 12px/1.2 ui-monospace, SFMono-Regular, Menlo, monospace;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+    }
+
+    .status::before {
+      content: "";
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      margin-right: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 5px rgba(215, 255, 100, .08);
+    }
+
+    main {
+      display: grid;
+      grid-template-columns: minmax(0, 1.55fr) minmax(280px, .7fr);
+      gap: clamp(48px, 8vw, 110px);
+      align-items: end;
+      min-height: calc(100vh - 177px);
+      padding: 80px 0 72px;
+    }
+
+    .eyebrow {
+      margin: 0 0 24px;
+      color: var(--accent);
+      font: 700 13px/1.2 ui-monospace, SFMono-Regular, Menlo, monospace;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      max-width: 760px;
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(58px, 9vw, 118px);
+      font-weight: 400;
+      line-height: .88;
+      letter-spacing: -.065em;
+      text-wrap: balance;
+    }
+
+    h1 em {
+      color: var(--accent);
+      font-weight: 400;
+    }
+
+    .intro {
+      max-width: 650px;
+      margin: 38px 0 0;
+      color: #d2cfc6;
+      font-size: clamp(18px, 2.2vw, 23px);
+      line-height: 1.55;
+      text-wrap: pretty;
+    }
+
+    .profile {
+      border-top: 1px solid var(--ink);
+      padding-top: 20px;
+    }
+
+    .profile h2 {
+      margin: 0 0 28px;
+      font-size: 13px;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+    }
+
+    dl { margin: 0; }
+
+    .row {
+      display: grid;
+      grid-template-columns: 92px 1fr;
+      gap: 16px;
+      padding: 18px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .row:last-child { border-bottom: 1px solid var(--line); }
+
+    dt {
+      color: var(--muted);
+      font: 500 12px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+
+    dd {
+      margin: 0;
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+    footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      min-height: 89px;
+      padding: 30px 0;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    footer strong { color: var(--ink); }
+
+    @media (max-width: 760px) {
+      .shell { width: min(calc(100% - 28px), var(--max)); }
+      header { min-height: 72px; }
+      .status { font-size: 10px; }
+      main {
+        grid-template-columns: 1fr;
+        align-items: start;
+        gap: 62px;
+        min-height: auto;
+        padding: 66px 0 68px;
+      }
+      h1 { font-size: clamp(56px, 20vw, 86px); }
+      .intro { margin-top: 30px; }
+      footer { flex-direction: column; }
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .eyebrow, h1, .intro, .profile {
+        animation: rise .7s both;
+      }
+      h1 { animation-delay: .08s; }
+      .intro { animation-delay: .16s; }
+      .profile { animation-delay: .24s; }
+      @keyframes rise {
+        from { opacity: 0; transform: translateY(16px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header>
+      <div class="mark">Biki</div>
+      <div class="status">Ready to build</div>
+    </header>
+
+    <main>
+      <section aria-labelledby="page-title">
+        <p class="eyebrow">Hello, world. Meet Biki.</p>
+        <h1 id="page-title">Build smart.<br><em>Ship real.</em></h1>
+        <p class="intro">
+          Biki is here for autonomous coding, practical development workflows,
+          and turning ideas into working software. Keep it casual, keep it clear,
+          and get the job done.
+        </p>
+      </section>
+
+      <aside class="profile" aria-label="Quick profile">
+        <h2>Quick profile</h2>
+        <dl>
+          <div class="row">
+            <dt>Name</dt>
+            <dd>Biki</dd>
+          </div>
+          <div class="row">
+            <dt>Address as</dt>
+            <dd>Master</dd>
+          </div>
+          <div class="row">
+            <dt>Focus</dt>
+            <dd>Autonomous coding and development workflows</dd>
+          </div>
+          <div class="row">
+            <dt>Style</dt>
+            <dd>Casual English. Clear, direct, no fuss.</dd>
+          </div>
+        </dl>
+      </aside>
+    </main>
+
+    <footer>
+      <span><strong>Biki</strong> / Personal profile</span>
+      <span>Less talk. More working code.</span>
+    </footer>
+  </div>
+</body>
+</html>
